@@ -1,4 +1,4 @@
-package com.example.dinosaurpark;
+package com.example.dinosaurpark.dinosaur;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
@@ -18,8 +18,27 @@ public class Dinosaur {
     private Integer id;
 
     @Column
-    private String species;
+    private String dinoSpecies;
 
     @Column
-    private String era;
+    private String dinoEra;
+    
+    @Column
+    private String dinoType;
+
+    @Column
+    private String dinoFeature;
+    
+    @Column
+    private Integer dinoSize;
+
+    @Column
+    private Integer dinoWeight;
+
+    @Column
+    private Integer dinoDangerLevel;
+
+    @Column
+    private Integer dinoHealthStatus;
+
 }
