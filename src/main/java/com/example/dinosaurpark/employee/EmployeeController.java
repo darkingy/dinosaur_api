@@ -16,19 +16,19 @@ public class EmployeeController {
     
     private final EmployeeService employeeService;
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
     public ResponseEntity<List<Employee>> getAllEmployees() {
         List<Employee> employees = employeeService.getAllEmployees();
         return ResponseEntity.ok().body(employees);
     }
 
-    @GetMapping("/{empId}")
+    @GetMapping(value = "/{empId}", produces = "application/json")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("empId") Integer id) {
         Employee employee = employeeService.getEmployeeById(id);
         return ResponseEntity.ok().body(employee);
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
         Employee savedEmployee = employeeService.addEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEmployee);

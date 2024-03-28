@@ -20,6 +20,12 @@ public class DinosaurController {
         List<Dinosaur> dinosaurs = dinosaurService.getList();
         return new ResponseEntity<>(dinosaurs, HttpStatus.OK);
     }
+
+    @GetMapping("/dinolist/{dinosaurId}")
+    public ResponseEntity<Dinosaur> getDinosaurById(@PathVariable("dinosaurId") Integer id) {
+        Dinosaur dinosaur = dinosaurService.getDinosaurById(id);
+        return new ResponseEntity<>(dinosaur, HttpStatus.OK);
+    }
     
     @PostMapping(value = "/dinolist", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Dinosaur> addDinosaur(@RequestBody Dinosaur dinosaur) {

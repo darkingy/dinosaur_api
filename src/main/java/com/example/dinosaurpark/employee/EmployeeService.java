@@ -3,6 +3,7 @@ package com.example.dinosaurpark.employee;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -16,7 +17,7 @@ public class EmployeeService {
 
     public Employee getEmployeeById(Integer id) {
         return employeeRepository.findById(id)
-                                    .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
+                                    .orElseThrow(() -> new EntityNotFoundException("Employee not found with id: " + id));
     }
 
     public Employee addEmployee(Employee employee) {

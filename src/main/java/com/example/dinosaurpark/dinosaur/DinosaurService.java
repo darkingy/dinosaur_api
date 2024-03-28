@@ -18,6 +18,11 @@ public class DinosaurService {
         return this.dinosaurRepository.findAll();
     }
 
+    public Dinosaur getDinosaurById(Integer id) {
+        return dinosaurRepository.findById(id)
+                                    .orElseThrow(() -> new EntityNotFoundException("Dinosaur not found with id: " + id));
+    }
+
     //공룡 저장
     public Dinosaur saveDinosaur(@NonNull Dinosaur dinosaur) {
         return this.dinosaurRepository.save(dinosaur);
@@ -31,8 +36,7 @@ public class DinosaurService {
 
     //공룡 수정
     public Dinosaur updateDinosaur(Integer id, Dinosaur updatedDinosaur) {
-        Dinosaur dinosaur = dinosaurRepository.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Dinosaur not found with id: " + id));
+        Dinosaur dinosaur = getDinosaurById(id);
         
         dinosaur.setDinoDangerLevel(updatedDinosaur.getDinoDangerLevel());
         dinosaur.setDinoEra(updatedDinosaur.getDinoEra());
