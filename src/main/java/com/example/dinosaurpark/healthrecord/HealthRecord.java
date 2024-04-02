@@ -1,4 +1,4 @@
-package com.example.dinosaurpark.workschedule;
+package com.example.dinosaurpark.healthrecord;
 
 import jakarta.persistence.*;
 import lombok.*;
