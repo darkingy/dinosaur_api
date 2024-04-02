@@ -1,4 +1,4 @@
-package com.example.dinosaurpark.workschedule;
+package com.example.dinosaurpark.healthrecord;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
