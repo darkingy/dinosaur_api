@@ -1,5 +1,11 @@
 package com.example.dinosaurpark.user;
 
+import com.example.dinosaurpark.dinosaur.DinosaurController;
+import com.example.dinosaurpark.employee.EmployeeController;
+import com.example.dinosaurpark.healthrecord.HealthRecordController;
+import com.example.dinosaurpark.inspection.InspectionController;
+import com.example.dinosaurpark.schedule.ScheduleController;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,6 @@
 package com.example.dinosaurpark.dinosaur;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class DinosaurController {
     private final DinosaurService dinosaurService;
 
     // 모든 공룡 정보를 가져오는 엔드포인트
+    // 모든 공룡 정보 확인 - 모두(회원이 아닌 유저까지)
     @GetMapping(produces = "application/json")
     public ResponseEntity<List<Dinosaur>> getAllDinosaurs() {
         List<Dinosaur> dinosaurs = dinosaurService.getList();
@@ -23,6 +25,7 @@ public class DinosaurController {
     }
 
     // 특정 공룡의 정보를 가져오는 엔드포인트
+    // 모든 공룡 정보 확인(id) - 모두(회원이 아닌 유저까지)
     @GetMapping("/{dinosaurId}")
     public ResponseEntity<Dinosaur> getDinosaurById(@PathVariable("dinosaurId") Integer id) {
         Dinosaur dinosaur = dinosaurService.getDinosaurById(id);
@@ -30,21 +33,27 @@ public class DinosaurController {
     }
 
     // 새로운 공룡 정보를 추가하는 엔드포인트
+    // 공룡 정보 추가 - 관리자
     @PostMapping(consumes = "application/json", produces = "application/json")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Dinosaur> addDinosaur(@RequestBody Dinosaur dinosaur) {
         Dinosaur savedDinosaur = dinosaurService.saveDinosaur(dinosaur);
         return new ResponseEntity<>(savedDinosaur, HttpStatus.CREATED);
     }
 
     // 특정 공룡 정보를 삭제하는 엔드포인트
+    // 공룡 정보 삭제 - 관리자
     @DeleteMapping("{dinosaurId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteDinosaur(@PathVariable("dinosaurId") Integer id) {
         dinosaurService.deleteDinosaur(id);
         return ResponseEntity.ok().build();
     }
 
     // 특정 공룡 정보를 수정하는 엔드포인트
+    // 공룡 정보 수정 - 관리자
     @PutMapping("{dinosaurId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Dinosaur> updateDinosaur(@PathVariable("dinosaurId") Integer id,
             @RequestBody Dinosaur updatedDinosaur) {
         Dinosaur dinosaur = dinosaurService.updateDinosaur(id, updatedDinosaur);
