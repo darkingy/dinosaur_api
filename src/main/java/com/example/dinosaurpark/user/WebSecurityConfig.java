@@ -60,6 +60,8 @@ public class WebSecurityConfig {
                     .requestMatchers("/api/dinosaur/**").permitAll()
                     .requestMatchers("/api/employees/**").permitAll()
                     .requestMatchers("/api/health/**").permitAll()
+                    .requestMatchers("/api/schedule/**").permitAll()
+                    .requestMatchers("/api/inspection/**").permitAll()
                     .anyRequest().authenticated()
                 );
         
