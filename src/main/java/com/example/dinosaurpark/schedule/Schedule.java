@@ -21,4 +21,9 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column
+    private String feedingDetail;
+
+    @Column
+    private LocalTime feedingTime;
 }

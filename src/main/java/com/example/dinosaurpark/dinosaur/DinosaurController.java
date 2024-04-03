@@ -7,7 +7,7 @@ import java.util.List;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin // CORS 설정을 허용하는 어노테이션
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true") // CORS 설정을 허용하는 어노테이션
 @RequiredArgsConstructor // 필수 인자를 가진 생성자를 자동으로 생성하는 어노테이션
 @RestController // RESTful API를 처리하는 컨트롤러임을 표시하는 어노테이션
 @RequestMapping("/api/dinosaur") // 경로에 대한 요청을 처리하는 컨트롤러임을 지정하는 어노테이션
