@@ -1,6 +1,5 @@
 package com.example.dinosaurpark.employee;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,10 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import lombok.RequiredArgsConstructor;
-
-//getRandomHealthRecord를 사용하기 위한 임포트
-import com.example.dinosaurpark.healthrecord.HealthRecord;
-import com.example.dinosaurpark.healthrecord.HealthRecordService;
 
 @CrossOrigin
 @RequiredArgsConstructor
@@ -21,9 +16,6 @@ public class EmployeeController {
     
     private final EmployeeService employeeService;
 
-    @Autowired
-    private HealthRecordService healthRecordService;
-
     @GetMapping(produces = "application/json")
     public ResponseEntity<List<Employee>> getAllEmployees() {
         List<Employee> employees = employeeService.getAllEmployees();
@@ -31,14 +23,10 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/{empId}", produces = "application/json")
-    public ResponseEntity<EmployeeWithHealthRecord> getEmployeeById(@PathVariable("empId") Integer id) {
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("empId") Integer id) {
         Employee employee = employeeService.getEmployeeById(id);
 
-        List<HealthRecord> healthRecords = healthRecordService.getRandomHealthRecord(3);
-        
-        EmployeeWithHealthRecord employeeWithHealthRecord = new EmployeeWithHealthRecord(employee, healthRecords);
-
-        return ResponseEntity.ok().body(employeeWithHealthRecord);
+        return ResponseEntity.ok().body(employee);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")

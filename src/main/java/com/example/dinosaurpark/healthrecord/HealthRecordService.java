@@ -2,7 +2,6 @@ package com.example.dinosaurpark.healthrecord;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Collections;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -12,14 +11,28 @@ import lombok.RequiredArgsConstructor;
 public class HealthRecordService {
     private final HealthRecordRepository healthRecordRepository;
 
-    public List<HealthRecord> getRandomHealthRecord(int count) {
-        List<HealthRecord> healthRecords = healthRecordRepository.findAll();
+    public List<HealthRecord> getAllRecords() {
+        return healthRecordRepository.findAll();
+    }
 
-        if (healthRecords.isEmpty()) {
-            return Collections.emptyList();
-        }
+    public HealthRecord getRecordById(Integer id) {
+        return healthRecordRepository.findById(id)
+                                    .orElseThrow(() -> new EntityNotFoundException("Health Record not found with id: " + id));
+    }
 
-        Collections.shuffle(healthRecords);
-        return healthRecords.subList(0, Math.min(count, healthRecords.size()));
+    public HealthRecord addRecord(HealthRecord healthRecord) {
+        return healthRecordRepository.save(healthRecord);
+    }
+
+    public HealthRecord updateRecord(Integer id, HealthRecord updatedHealthRecord) {
+        HealthRecord healthRecord = getRecordById(id);
+
+        healthRecord.setHealthStatus(updatedHealthRecord.getHealthStatus());
+
+        return healthRecordRepository.save(healthRecord);
+    }
+
+    public void deleteRecord(Integer id) {
+        healthRecordRepository.deleteById(id);
     }
 }
