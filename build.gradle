@@ -41,6 +41,8 @@ dependencies {
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 	//Validator
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	//email
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 }
 
 tasks.named('test') {
