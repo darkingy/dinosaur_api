@@ -15,13 +15,11 @@ public class MailService {
 
     @Async
     public void mailSend(MailDto mailDto) {
-        for (String address : mailDto.getAddresses()) {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setTo(address);
-            message.setSubject(mailDto.getTitle());
-            message.setText(mailDto.getMessage());
-            javaMailSender.send(message);
-        }
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(mailDto.getAddress());
+        message.setSubject(mailDto.getTitle());
+        message.setText(mailDto.getMessage());
+        javaMailSender.send(message);
     }
 
 }
